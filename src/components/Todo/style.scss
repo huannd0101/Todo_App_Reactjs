@@ -1,0 +1,39 @@
+.list-box {
+  .box {
+    margin: auto;
+    width: 470px;
+    border-bottom: 1px solid gray;
+    height: 40px;
+    padding-top: 5px;
+    span {
+      font-size: 15px;
+    }
+  }
+  padding: 10px;
+}
+button {
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  padding: 5px 10px;
+  margin: 0 3px;
+  border-radius: 5px;
+  color: white;
+}
+input {
+  padding: 7px 15px;
+  border-radius: 50px;
+  outline: none;
+  border: 0px;
+  width: 250px;
+}
+.btn-add {
+  padding: 7px 25px;
+  background-color: rgb(0, 110, 255);
+}
+.btn-edit {
+  background-color: rgb(0, 110, 255);
+}
+.btn-delete {
+  background-color: rgb(248, 35, 35);
+}
