@@ -28,8 +28,17 @@ class Todo extends React.Component {
         this.setState({
             title: ''
         })
+    }
 
-        
+    keyUpHandle = (e) => {
+        if(e.keyCode === 13) {
+            this.onClickHandle()
+        }
+        if(e.keyCode === 27) {
+            this.setState({
+                title: ''
+            })
+        }
     }
 
     render() {
@@ -37,7 +46,12 @@ class Todo extends React.Component {
         return (
             <div className="list-todo">
                 <div className="add-todo">
-                    <input type="text" value={title} onChange={(e) => this.onchangeTitleHandle(e)} /> <button onClick={() => this.onClickHandle()} className="btn-add">Add</button>
+                    <input type="text" 
+                        value={title} 
+                        onChange={(e) => this.onchangeTitleHandle(e)} 
+                        onKeyUp={(e) => this.keyUpHandle(e)}
+                    /> 
+                    <button onClick={() => this.onClickHandle()} className="btn-add">Add</button>
                 </div>
             </div>
         );

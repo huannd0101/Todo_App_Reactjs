@@ -76,6 +76,18 @@ class Todo extends React.Component {
         toast.success("Sửa thành công!");
     }
 
+    keyUpHandle = (e, item) => {
+        if(e.keyCode === 13){
+            this.handleSave(item)
+        }
+        if(e.keyCode === 27) {
+            this.setState({
+                editTodo: {}, 
+                temp: {}
+            })
+        }
+    }
+
     render() {
         const {editTodo} = this.state;
         const {todos} = this.state;
@@ -94,7 +106,11 @@ class Todo extends React.Component {
                                 {
                                     temp && temp.id === item.id && 
                                     <>
-                                        <input type="text" onChange={(e) => this.onChangeTodoHandle(e)} value={editTodo.title} /> 
+                                        <input type="text" 
+                                            onChange={(e) => this.onChangeTodoHandle(e)} 
+                                            value={editTodo.title} 
+                                            onKeyUp={(e) => this.keyUpHandle(e, item)}
+                                        /> 
                                         <button className='btn-edit' onClick={() => this.handleSave(item)}>Save</button>
                                     </>
                                 }
