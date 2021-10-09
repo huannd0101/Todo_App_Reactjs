@@ -2,6 +2,7 @@ import React from "react";
 import './style.scss';
 import AddTodo from '../AddTodo/AddTodo';
 import {toast} from 'react-toastify';
+import { wait } from "@testing-library/dom";
 
 
 class Todo extends React.Component {
@@ -40,9 +41,11 @@ class Todo extends React.Component {
 
         toast.success("Xóa thành công!")
 
-        if(newTodos.length === 0){
-            toast.info("Danh sách trống");
-        }
+        setTimeout(() => {
+            if(newTodos.length === 0){
+                toast.info("Danh sách trống");
+            }
+        }, 1500);
     }
 
     onChangeTodoHandle = (e) => {
