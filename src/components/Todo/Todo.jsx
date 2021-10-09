@@ -106,10 +106,13 @@ class Todo extends React.Component {
                                 {
                                     temp && temp.id === item.id && 
                                     <>
-                                        <input type="text" 
+                                        <input 
+                                            id="inp"
+                                            type="text" 
                                             onChange={(e) => this.onChangeTodoHandle(e)} 
                                             value={editTodo.title} 
                                             onKeyUp={(e) => this.keyUpHandle(e, item)}
+                                            autoFocus
                                         /> 
                                         <button className='btn-edit' onClick={() => this.handleSave(item)}>Save</button>
                                     </>
