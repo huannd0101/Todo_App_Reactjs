@@ -6,7 +6,8 @@ import { wait } from "@testing-library/dom";
 
 
 class Todo extends React.Component {
-    state = {
+
+    state = JSON.parse(localStorage.getItem("obj-todo")) ?? {
         todos: [
             
         ],
@@ -15,11 +16,19 @@ class Todo extends React.Component {
     }
 
     addNewTodo = (todo) => {
-        this.setState({
-            todos: [...this.state.todos, todo]
-        })
+        this.setState(pre => {
+            const obj = {
+                todos: [...this.state.todos, todo],
+                editTodo: {},
+                temp: {}
+            };
+            //lưu
+            localStorage.setItem("obj-todo", JSON.stringify(obj));
+            return obj
+    })
         //success
         toast.success("Add thành công");
+        
     }
 
     handleEdit = (item) => {
@@ -27,6 +36,8 @@ class Todo extends React.Component {
             editTodo: item,
             temp: item
         });
+        //lưu
+        localStorage.setItem("obj-todo", JSON.stringify(this.state));
     }
 
     handleDelete = (item) => {
@@ -35,8 +46,17 @@ class Todo extends React.Component {
                 return i;
             }
         })
-        this.setState({
-            todos: newTodos
+        this.setState(pre => {
+            const obj = {
+                todos: newTodos, 
+                editTodo: this.state.editTodo,
+                temp: this.state.temp
+            };
+
+            //lưu
+            localStorage.setItem("obj-todo", JSON.stringify(obj));
+
+            return obj;
         })
 
         toast.success("Xóa thành công!")
@@ -44,8 +64,10 @@ class Todo extends React.Component {
         setTimeout(() => {
             if(newTodos.length === 0){
                 toast.info("Danh sách trống");
+                localStorage.removeItem("obj-todo")
             }
         }, 1500);
+
     }
 
     onChangeTodoHandle = (e) => {
@@ -77,6 +99,9 @@ class Todo extends React.Component {
         })
 
         toast.success("Sửa thành công!");
+
+        //lưu
+        localStorage.setItem("obj-todo", JSON.stringify(this.state));
     }
 
     keyUpHandle = (e, item) => {
